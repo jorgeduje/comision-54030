@@ -1,11 +1,9 @@
 
-const ItemList = ( {nombre, saludar, saludar2} ) => {
+const ItemList = (  ) => {
 
   return (
     <div>
-      <h2>Hola {nombre}</h2>
-      <button onClick={saludar} >Saludar</button>
-      <button onClick={saludar2} >Saludar2</button>
+      <h1>Aca van a ir los items</h1>
     </div>
   );
 };
