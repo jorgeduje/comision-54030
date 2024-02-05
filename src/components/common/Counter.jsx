@@ -1,11 +1,12 @@
 
 import { useState } from "react"
 
-export const Counter = () => {
+export const Counter = ( ) => {
     const [ counter, setCounter  ] = useState( 0 ) // [ variable, funcion ]
 
     // console.log( x[0] ) // [ variable, funcion ]
 
+   
 
 
     const sumar = ()=>{
