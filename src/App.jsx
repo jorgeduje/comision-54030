@@ -1,38 +1,17 @@
-import {useState} from "react"
-// import Navbar from "./components/layout/Navbar"
-// import { productos, Navbar } from "./components/layout/Navbar"
+import { Counter } from "./components/common/Counter";
+import ItemCountContainer from "./components/common/itemCount/ItemCountContainer";
+import { Navbar } from "./components/layout/Navbar";
+import ItemListContainer from "./components/pages/itemListContainer/ItemListContainer";
 
-import { Counter } from "./components/common/Counter"
-import { Navbar } from "./components/layout/Navbar"
-import ItemListContainer from "./components/pages/ItemListContainer"
-import ProbandoMaterial from "./components/common/ProbandoMaterial"
-import ProbandoResponsive from "./components/common/ProbandoResponsive"
-
-const App = ()=>{
-
-  const [ darkMode , setDarkMode  ] = useState(false)
-
-  
-
-  const cambiarModo = ()=>{
-
-    setDarkMode(  !darkMode  )
-
-  }
-
-  console.log( darkMode )
-
+const App = () => {
   return (
-    <div>
-      {/* <button onClick={cambiarModo}>De modo claro a modo oscuro</button>
-     <Navbar />
-     <ItemListContainer />
-     <Counter /> */}
-     {/* <ProbandoMaterial /> */}
-     <ProbandoResponsive />
-    </div>
-  )
-}
+    <>
+      <ItemCountContainer stock={3} /> 
+      {/* <ItemCountContainer stock={5} />
+      <ItemCountContainer stock={7} /> 
+      <ItemCountContainer stock={2}/>  */}
+    </>
+  );
+};
 
-export default App
-
+export default App;
