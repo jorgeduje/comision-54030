@@ -1,9 +1,19 @@
+import { ProductCard } from "../../common/ProductCard";
 
-const ItemList = (  ) => {
-
+const ItemList = ({ items }) => {
   return (
     <div>
-      <h1>Aca van a ir los items</h1>
+      {items.map(({id, img, title, description, price}) => {
+        return (
+          <ProductCard
+            key={id}
+            img={img}
+            title={title}
+            description={description}
+            price={price}
+          />
+        );
+      })}
     </div>
   );
 };
