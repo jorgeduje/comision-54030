@@ -1,10 +1,11 @@
-import ItemCountContainer from "./components/common/itemCount/ItemCountContainer";
+import { Navbar } from "./components/layout/Navbar";
+import ItemListContainer from "./components/pages/itemListContainer/ItemListContainer";
 
 const App = () => {
   return (
     <>
-      <ItemCountContainer stock={3} /> 
-
+      <Navbar />
+      <ItemListContainer />
     </>
   );
 };
