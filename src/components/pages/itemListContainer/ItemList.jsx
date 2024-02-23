@@ -1,9 +1,9 @@
 import { ProductCard } from "../../common/ProductCard";
-
-const ItemList = ({ items }) => {
+import "./ItemListContainer.css"
+const ItemList = ({ products }) => {
   return (
-    <div>
-      {items.map(({id, img, title, description, price}) => {
+    <div className="cards-container">
+      {products.map(({id, img, title, description, price}) => {
         return (
           <ProductCard
             key={id}
@@ -11,6 +11,7 @@ const ItemList = ({ items }) => {
             title={title}
             description={description}
             price={price}
+            id={id}
           />
         );
       })}

@@ -1,35 +1,39 @@
 import ItemList from "./ItemList";
-import { products } from "../../../productsMock";
+import { getProducts } from "../../../productsMock";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const ItemListContainer = () => {
-  const [items, setItems] = useState([]);
+  const { category } = useParams();
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // creamos o solicitamos
-    const tarea = new Promise((resolve, reject) => {
-      resolve(products);
-      // reject( "error" );
+    setIsLoading(true);
+    getProducts().then((resp) => {
+      // Verifico si existe una category en el parámetro
+      if (category) {
+        const productsFilter = resp.filter(
+          (product) => product.category === category
+        );
+        // Guardamos los productos filtrados por categoría en nuestro state products
+        setProducts(productsFilter);
+      } else {
+        // Si no tenemos una category almacenamos todos los productos
+        setProducts(resp);
+      }
+
+      setIsLoading(false);
     });
-
-    // manejar
-
-    tarea
-      .then((res) => {
-        setItems(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  
+  }, [category]);
 
   return (
     <>
-  
-     <ItemList items={items} /> 
-  
+      {isLoading ? (
+        <h2>Cargando productos...</h2>
+      ) : (
+        <ItemList products={products} />
+      )}
     </>
   );
 };

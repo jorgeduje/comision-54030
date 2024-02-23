@@ -1,18 +1,23 @@
-import React, { useEffect } from 'react'
-import { products } from '../../../productsMock'
-
+import { useEffect, useState } from "react";
+import { getProduct } from "../../../productsMock";
+import { useParams } from "react-router-dom";
+import { ItemDetail } from "./ItemDetail";
 
 export const ItemDetailContainer = () => {
+  const { id } = useParams();
+  console.log(id)
 
-    let id = 21
+  const [item, setItem] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-
-    useEffect( ()=>{
-    // tarea lo mismo del itemList 
-    // guardar en un estado el objeto del producto 
-    }, [id])
+  useEffect(() => {
+    getProduct(+id).then((resp) => {
+      setItem(resp);
+      setIsLoading(false);
+    });
+  }, [id]);
 
   return (
-    <div>ItemDetailContainer</div>
-  )
-}
+    <>{isLoading ? <h2>Cargando producto...</h2> : <ItemDetail item={item} />}</>
+  );
+};
