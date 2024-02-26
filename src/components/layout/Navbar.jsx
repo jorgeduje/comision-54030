@@ -1,10 +1,11 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CartWidget from "../common/CartWidget";
 import "./Navbar.css";
 
 export const Navbar = () => {
   return (
     <>
+    
       <div className="containerNavbar">
         <Link to="/" style={{ color: "beige" }}>
           Comision 54030
@@ -16,7 +17,7 @@ export const Navbar = () => {
         </ul>
         <CartWidget />
       </div>
-      <Outlet />
+     
     </>
   );
 };
