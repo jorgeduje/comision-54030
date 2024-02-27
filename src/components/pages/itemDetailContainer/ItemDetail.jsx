@@ -1,6 +1,6 @@
 import ItemCountContainer from "../../common/itemCount/ItemCountContainer";
 import "./ItemDetail.css"
-export const ItemDetail = ({ item }) => {
+export const ItemDetail = ({ item, onAdd }) => {
   console.log(item);
   return (
     <div>
@@ -27,6 +27,7 @@ export const ItemDetail = ({ item }) => {
       <div style={{ display: "flex", justifyContent: "center" }}>
           <ItemCountContainer 
             stock={item.stock}
+            onAdd={onAdd}
           />
         </div>
       </div>
