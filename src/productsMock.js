@@ -41,9 +41,7 @@ export let products = [
 export const getProducts = () => {
   return new Promise((resolve, reject) => {
     if (products.length > 0) {
-      setTimeout(() => {
         resolve(products);
-      }, 500);
     } else {
       reject("No hay productos");
     }

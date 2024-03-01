@@ -5,6 +5,9 @@ import { ItemDetailContainer } from "./components/pages/itemDetailContainer/Item
 import { Layout } from "./components/layout/Layout";
 import { CheckoutContainer } from "./components/pages/checkout/CheckoutContainer";
 import CartContextProvider from "./context/CartContext";
+import { FetchingAxios } from "./components/pages/fetchingAxios/FetchingAxios";
+import { Dashboard } from "./components/pages/dashboard/Dashboard";
+import { ProtectedRoutes } from "./ProtectedRoutes";
 
 const App = () => {
   return (
@@ -18,6 +21,13 @@ const App = () => {
             <Route path="/cart" element={<CartContainer />} />
             <Route path="/checkout" element={<CheckoutContainer />} />
             <Route path="*" element={<h1>404 not found</h1>} />
+            <Route path="/fetching-axios" element={<FetchingAxios />} />
+          </Route>
+
+          <Route element={<ProtectedRoutes />}>
+            <Route element={<Layout />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Route>
           </Route>
         </Routes>
       </CartContextProvider>
