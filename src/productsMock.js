@@ -43,7 +43,7 @@ export const getProducts = () => {
     if (products.length > 0) {
       setTimeout(() => {
         resolve(products);
-      }, 500);
+      }, 2000);
     } else {
       reject("No hay productos");
     }
