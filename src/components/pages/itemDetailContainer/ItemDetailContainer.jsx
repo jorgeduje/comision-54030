@@ -10,7 +10,10 @@ export const ItemDetailContainer = () => {
   const [item, setItem] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const {addToCart} = useContext( CartContext )
+  const {addToCart, getTotalQuantityById} = useContext( CartContext )
+
+  const initial = getTotalQuantityById(+id)
+  console.log(initial)
 
 //  const navigate = useNavigate()
 
@@ -37,7 +40,7 @@ export const ItemDetailContainer = () => {
       {isLoading ? (
         <h2>Cargando producto...</h2>
       ) : (
-        <ItemDetail item={item} onAdd={onAdd} />
+        <ItemDetail item={item} onAdd={onAdd} initial={initial} />
       )}
     </>
   );
