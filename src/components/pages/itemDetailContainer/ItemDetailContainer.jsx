@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { getProduct } from "../../../productsMock";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ItemDetail } from "./ItemDetail";
 import { CartContext } from "../../../context/CartContext";
 
@@ -13,9 +13,8 @@ export const ItemDetailContainer = () => {
   const {addToCart, getTotalQuantityById} = useContext( CartContext )
 
   const initial = getTotalQuantityById(+id)
-  console.log(initial)
 
-//  const navigate = useNavigate()
+
 
   useEffect(() => {
     getProduct(+id).then((resp) => {

@@ -2,10 +2,9 @@ import ItemList from "./ItemList";
 import { getProducts } from "../../../productsMock";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
-import { Box, CircularProgress } from "@mui/material";
-import { CardSkeleton } from "../../common/CardSkeleton";
 
+import { CardSkeleton } from "../../common/CardSkeleton";
+import "./ItemListContainer.css";
 const ItemListContainer = () => {
   const { category } = useParams();
   const [products, setProducts] = useState([]);
@@ -29,44 +28,22 @@ const ItemListContainer = () => {
 
   // if con return temprano
 
-  if( isLoading ){
-    return  <div style={{display: "flex"}}>
-       <CardSkeleton />
-       <CardSkeleton />
-       <CardSkeleton />
-       <CardSkeleton />
-       </div>
+  if (isLoading) {
+    return (
+      <div className="cards-container">
+        <CardSkeleton />
+        <CardSkeleton />
+        <CardSkeleton />
+        <CardSkeleton />
+      </div>
+    );
   }
 
   return (
     <>
-     
-    
-        <ItemList products={products} />
-  
-      {/* {isLoading ? (
-        <Box sx={{ display: "flex" }}>
-          <CircularProgress />
-        </Box>
-      ) : (
-        <ItemList products={products} />
-      )} */}
-
-      {/* <ItemList products={products} /> */}
-      {/* {
-      isLoading && <h1>Cargando</h1> 
-    } */}
+      <ItemList products={products} />
     </>
   );
 };
 
 export default ItemListContainer;
-
-// const suma = ()=>{
-
-//   if(){
-//     return 2
-//   }
-
-//   return items
-// }
