@@ -4,7 +4,7 @@ export const CardSkeleton = () => {
   return (
     <Stack
       spacing={1}
-      sx={{ border: "1px solid grey", borderRadius: 3, width: 345, height: 350, overflow: "hidden" }}
+      sx={{ boxShadow: "0px 0px 5px grey", borderRadius: 3, width: 345, height: 350, overflow: "hidden" }}
     >
       {/* For variant="text", adjust the height via font-size */}
       <Skeleton

@@ -26,15 +26,23 @@ const ItemListContainer = () => {
     });
   }, [category]);
 
-  // if con return temprano
 
   if (isLoading) {
     return (
       <div className="cards-container">
-        <CardSkeleton />
-        <CardSkeleton />
-        <CardSkeleton />
-        <CardSkeleton />
+        {category ? (
+          <>
+            <CardSkeleton />
+            <CardSkeleton />
+          </>
+        ) : (
+          <>
+            <CardSkeleton />
+            <CardSkeleton />
+            <CardSkeleton />
+            <CardSkeleton />
+          </>
+        )}
       </div>
     );
   }
