@@ -5,6 +5,7 @@ import { ItemDetailContainer } from "./components/pages/itemDetailContainer/Item
 import { Layout } from "./components/layout/Layout";
 import { CheckoutContainer } from "./components/pages/checkout/CheckoutContainer";
 import CartContextProvider from "./context/CartContext";
+import { FormFormik } from "./components/pages/formFormik/FormFormik";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
             <Route path="/item/:id" element={<ItemDetailContainer />} />
             <Route path="/cart" element={<CartContainer />} />
             <Route path="/checkout" element={<CheckoutContainer />} />
+            <Route path="/formik" element={<FormFormik />} />
             <Route path="*" element={<h1>404 not found</h1>} />
           </Route>
         </Routes>
