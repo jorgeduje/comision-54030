@@ -3,7 +3,8 @@ import { createContext, useState } from "react";
 export const CartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
-  const [cart, setCart] = useState([]); // [ ]---> {} ---> [{1}] ---> [{1}, {3}]
+  // cart ---> [{}, {}]
+  const [cart, setCart] = useState( JSON.parse( localStorage.getItem("cart") ) || [] ); 
 
   const addToCart = (product) => {
     let existe = isInCart(product.id);
@@ -21,13 +22,17 @@ const CartContextProvider = ({ children }) => {
       });
 
       setCart(newArray);
+      localStorage.setItem("cart", JSON.stringify(newArray) );
     } else {
       setCart([...cart, product]);
+      localStorage.setItem("cart", JSON.stringify([...cart, product]) );
+
     }
   };
 
   const clearCart = () => {
     setCart([]);
+    localStorage.removeItem("cart")
   };
 
   const isInCart = (id) => {
@@ -35,40 +40,37 @@ const CartContextProvider = ({ children }) => {
     return existe;
   };
 
-  const removeById = (id)=>{
-    let newArray = cart.filter((elemento)=> elemento.id !== id ) // ---> []
-    setCart(newArray)
-  }
+  const removeById = (id) => {
+    let newArray = cart.filter((elemento) => elemento.id !== id);
+    setCart(newArray);
+    localStorage.setItem( "cart", JSON.stringify(newArray))
+  };
 
-  const getTotalItems = ()=>{
+  const getTotalItems = () => {
+    let total = cart.reduce((acc, elemento) => {
+      return acc + elemento.quantity;
+    }, 0);
+    return total;
+  };
 
-    let total = cart.reduce( (acc, elemento)=>{
-      return acc + elemento.quantity
-    }, 0)
-    return total
+  const getTotalPrice = () => {
+    let total = cart.reduce((acc, elemento) => {
+      return acc + elemento.quantity * elemento.price;
+    }, 0);
 
-  }
+    return total;
+  };
 
-  const getTotalPrice  = ()=>{
-
-    let total = cart.reduce( (acc, elemento)=>{
-      return acc + (elemento.quantity * elemento.price)
-    }, 0)
-
-    return total
-
-  }
-
-  const getTotalQuantityById = ( id )=>{
+  const getTotalQuantityById = (id) => {
     // si encuentra devuelve el elemento, si no, undefined
-    let product = cart.find( (elemento)=> elemento.id === id  )
+    let product = cart.find((elemento) => elemento.id === id);
 
-    if(product){
-      return product.quantity
-    }else{
-      return product
+    if (product) {
+      return product.quantity;
+    } else {
+      return product;
     }
-  }
+  };
 
   let data = {
     cart,
@@ -77,7 +79,7 @@ const CartContextProvider = ({ children }) => {
     removeById,
     getTotalItems,
     getTotalPrice,
-    getTotalQuantityById
+    getTotalQuantityById,
   };
 
   return <CartContext.Provider value={data}>{children}</CartContext.Provider>;
