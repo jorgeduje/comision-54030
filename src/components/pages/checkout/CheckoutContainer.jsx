@@ -1,33 +1,56 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Checkout } from "./Checkout";
+import { CartContext } from "../../../context/CartContext";
+import { addDoc, collection, updateDoc, doc } from "firebase/firestore"
+import { db } from "../../../firebaseConfig";
+
+
 
 export const CheckoutContainer = () => {
   const [userInfo, setUserInfo] = useState({
     name: "",
-    lastName: "",
+    phone: "",
+    email: "",
   });
+
+  const [orderId, setOrderId] = useState(null)
+
+  const {cart, getTotalPrice, clearCart} = useContext(CartContext)
+
+  let totalPrice = getTotalPrice()
 
   const envioDeFormulario = (event) => {
     event.preventDefault();
 
-    // ACA VALIDAMOS TODO
-    // Aca manipulo lo que quiera hacer con los datos del formulario
-    console.log("se envio el formulario");
-    console.log(userInfo);
+    let order = {
+      buyer: userInfo,
+      items: cart,
+      total: totalPrice
+    }
+
+    let ordersCollection = collection(db, "orders")
+
+    addDoc(ordersCollection, order).then( (res)=> setOrderId(res.id))
+   
+    cart.forEach((product)=>{
+
+      let refDoc = doc(db, "products", product.id )
+
+      updateDoc( refDoc , {stock: product.stock - product.quantity } )
+    })
+
+    clearCart()
+    
+
   };
-
-  //   const capturarNombre = (event) => {
-  //     setUserInfo( {...userInfo, name: event.target.value} )
-  //   };
-
-  //   const capturarApellido = (event) => {
-  //     setUserInfo( {...userInfo, lastName: event.target.value } )
-  //   };
 
   const capturar = (event) => {
-    console.log(event)
-    setUserInfo( {...userInfo, [event.target.name]: event.target.value } )
+    setUserInfo({ ...userInfo, [event.target.name]: event.target.value });
   };
 
-  return <Checkout envioDeFormulario={envioDeFormulario} capturar={capturar} />;
+  return <Checkout orderId={orderId} envioDeFormulario={envioDeFormulario} capturar={capturar} />;
 };
+
+
+// put {title: das , price: 12 , stock: 12 - 3, }
+// patch  { stock: 12 - 3, }
