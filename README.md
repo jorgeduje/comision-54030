@@ -1,8 +1,28 @@
-# React + Vite
+# Ecommerce
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Esta es una tienda en linea 
 
-Currently, two official plugins are available:
+![](/public/vite.svg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[Google](www.google.com)
+
+```
+npm i react-router-dom
+```
+
+```javascript
+const nombre = "pepe"
+const sumar = ()=>{
+    return 1 + 2
+}
+```
+
+### Para hacer funcionar bla bla bla
+#### Configura las siguientes variables
+
+- VITE_APIKEY=
+- VITE_AUTH_DOMAIN=
+- VITE_PROJECT=
+- VITE_STORAGE=
+- VITE_MESSAGIN=
+- VITE_APP_ID=
